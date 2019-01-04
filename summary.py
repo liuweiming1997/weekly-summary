@@ -8,6 +8,7 @@ DAY = 24 * 60 * 60 # in seconds
 SUMMARY = "summary"
 week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 margin_top = "------------------------------------------------------------\n"
+no_write = "  这一天没有写总结\n"
 
 def gen_monday_ts() -> 'int':
     now_time_second = int(time.time())
@@ -31,11 +32,11 @@ def summary():
         for file_name in line:
             idx += 1
             with open(os.path.join(floder_name, file_name[:-1]), "r") as fp:
-                text = fp.read()
-                if len(text) == 0:
-                    continue
                 fpw.write(margin_top + "\n")
                 fpw.write(week[idx] + ":\n")
+                text = fp.read()
+                if len(text) == 0:
+                    text = no_write
                 fpw.write(text + "\n")
 
 if __name__ == '__main__':

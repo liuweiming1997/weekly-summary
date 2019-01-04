@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from os import path
+import os
 import time
 
 DAY = 24 * 60 * 60 # in seconds
@@ -21,12 +21,16 @@ def gen_floder_name() -> 'string':
 
 def gen() -> 'void':
     floder_name = gen_floder_name()
-    if path.exists(floder_name):
+    if os.path.exists(floder_name):
+        print("cd {}".format(floder_name))
         return
-    path.makedirs(floder_name)
-    file_name = path.join(floder_name, "summary")
-    # with open(file_name, "w") as fp:
-    print(file_name)
+    os.makedirs(floder_name)
+    timestamp = gen_monday_ts()
+    for idx in range(0, 5):
+        file_name = os.path.join(floder_name, time.strftime("%Y%m%d", time.localtime(timestamp)))
+        with open(file_name, "w") as fp:
+            pass
+        timestamp = timestamp + DAY
 
 if __name__ == '__main__':
     gen()

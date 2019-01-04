@@ -7,7 +7,7 @@ import time
 DAY = 24 * 60 * 60 # in seconds
 SUMMARY = "summary"
 week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-margin_top = "---------------------------------------------------\n\n"
+margin_top = "------------------------------------------------------------\n"
 
 def gen_monday_ts() -> 'int':
     now_time_second = int(time.time())
@@ -27,7 +27,6 @@ def summary():
     line = os.popen('ls {}'.format(floder_name)).readlines()
     with open(SUMMARY, "w") as fpw:
         fpw.write("         Weiming Liu weekly summary\n")
-        fpw.write(margin_top)
         idx = -1
         for file_name in line:
             idx += 1
@@ -35,9 +34,9 @@ def summary():
                 text = fp.read()
                 if len(text) == 0:
                     continue
+                fpw.write(margin_top + "\n")
                 fpw.write(week[idx] + ":\n")
-                fpw.write(text)
-                fpw.write(margin_top)
+                fpw.write(text + "\n")
 
 if __name__ == '__main__':
     summary()

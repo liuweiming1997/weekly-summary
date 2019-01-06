@@ -1,0 +1,3 @@
+  wsgi就算是服务器层，自己写的代码叫application层，wsgi相当于nginx，由werkzeug提供。
+  wsgi 做的事情：一套关于程序端和服务器端的规范，或者说统一的接口。
+  所以wsgi相当于给我们定好了规范，解析好http协议的内容(environ)

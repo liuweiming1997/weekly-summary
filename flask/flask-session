@@ -1,0 +1,14 @@
+  阅读了flask中session的实现机制：flask通过itsdangerous这个库将session的内容序列化到浏览器的cookie,当浏览器再次请求时将反序列化cookie内容。
+  cookie通过.分割，分成了三部分：内容序列化 + 时间 + 防篡改值, 前面的内容序列化可以转换出来，是后面的ts和防篡改值不会转换，一直报错误。
+
+code:
+  s = b'\\1x\xc3'
+  s.decode("utf-8")
+
+Traceback (most recent call last):                                                                                                                                       File "<stdin>", line 1, in <module>
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc3 in position 3: unexpected end of data
+
+  还不知道什么原因，有待探究。总的来说就是这是一个序列化与反序列化的过程，途中flask用了HMAC算法签名。也就是说即使你修改了
+前面的值，由于签名值有误，flask不会使用该session。所以一定要保存好SECRET_KEY
+  看到网上说有一个扩展flask-session更安全，只会把session-id给client，但是我觉得这一步可以自己在代码层面实现就可以了？
+

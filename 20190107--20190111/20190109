@@ -1,0 +1,15 @@
+  nginx处理无效路由，就是有一些页面访问过的，但是不能在浏览器直接输入，因为当时可能还要处理前面的逻辑，或者在js没有配好这个路由。
+我觉得，一开始访问是访问在nginx，然后只需要nginx能拉起一个js文件，后面的东西都是可以用js来控制的。所以我们nginx只需要匹配一个全局location，
+然后使用try_files去拉起一个js文件即可。
+    location / {                                                                                                                                                       
+      try_files $uri /index.html;
+    }
+    locaton /index.html {
+      root /usr/share/nginx/html 
+    }
+我默认先跑去index.html页面。因为index.html是可以访问的，这样后面就可以拉起js文件了。
+这里有个bug:
+  就是不能访问   https://www.xxx.com/index.html/aa/bb/cc
+  如果别人访问这个，就会404 not found，因为安装nginx的匹配，会匹配去location /index.html了，不过这个是小数。
+  而且在try_files里面改成去匹配js文件也可以，我也没改这个。
+

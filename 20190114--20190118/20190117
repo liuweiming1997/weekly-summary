@@ -1,0 +1,5 @@
+  今天去daily run。两次自己去daily run的时候都是一开始插银盘进去的时候，/var/pony/current_trip/schedule_trip里面是空的，应该是不支持热启动？需要重新
+启动。但是今天出车的是sh7，感觉应该是挺新的车了，还以为他会支持热启动的。还好两次daily run都挺顺利的，就是和司机的配合不是很好。这次两个司机，一个新手
+在开，到达目的地后我在等挂p档，他踩了下刹车，就有了一个接管的issue了。还有一个hard break的issue。回来看玩replay后，问了人发给了PNC处理。
+  中途机器crash了一次，后来重启后跑了一下子，就选择destination回公司。
+  

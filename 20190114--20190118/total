@@ -1,0 +1,32 @@
+            Weiming Liu weekly summary
+----------------------------------------------------------------------
+  这周干的事比较少，全部都写在一起了。
+
+  关于material-ui，他和其他普通HTML控件有点不同，小的方面比如网上关于HTML控件上面
+的属性，比如onclick，material-ui需要写成onClick，这些是小的方面。有一些属性
+不起作用，比如maxlength，作用是限制input框里面的最大长度，在material-ui上起不来。
+还有CSS的，网上的background-image需要写成backgroundImage（官方推荐）或者'background-image'，
+用引号包起来也可以。但是设置背景图片大小background-size，也不生效。关于上面两个问题，
+在问朋友和google中，属于还没解决的问题。
+
+  为后台加上了单元测试，跑python代码的时候import包路径问题有点严重，没有办法像codebase
+里面from common.webapps.common.backend.....这样import，最后我就是用sys.path.append解决，
+感觉写的有点丑。还没来的及查是不是bazel可以帮我们把python导入包变成这样。还有如果不是
+common目录下的代码，还能不能这样导入？
+
+  为后台加上了错误处理，然后配合flask的register_error_handler，可以很方便的自己写基类，然后
+raise子类异常，同时可以为每个错误写log，还有改写对应状态码等。
+
+  daily run的话遇到唯一的问题就是/var/pony/current_trip/schedule_trip/里面是空吧。据说是不支持
+热启动，reboot可以解决。但是我那台已经是sh7了，我记得以前好像可以的。还有整个流程还是不熟悉，我
+一上车，电脑就是开启中的状态，我都不知道谁帮我开的电脑。
+
+  后台用了redis的作用是：
+    1、每一个用户写blog，生成一个user_blog_id，作为blog的标识。
+
+  前端的话感觉自己排版什么的太弱了，能力基本为0。最近学习了一下flex布局方式，以后就用这种了。
+然后在start_project中多自己弄弄布局之类的。
+
+  发现docker-compose容器不靠谱，有一个命令depend on可以让依赖的容器比如db先跑起来，但是db里面的
+mysql还没跑起来，所以conn失败。可能需要用makefile来控制一下。
+

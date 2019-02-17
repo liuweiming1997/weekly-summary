@@ -1,0 +1,15 @@
+  Weiming Liu  周末汇报
+  周一的时候终于找到怎么hack sqlalchemy的方法，找的过程有点艰辛，因为发现他一开始初始化的时候还是会执行查询数据库版本，查询数据库字符集编码的操作，所以要想统计这些
+操作，就只能hack到数据库链接驱动里面。对于pymysql这种驱动，就是:engine.__dict__['dialect'].__dict__['dbapi'].__dict__['cursors'].__dict__['Cursor'].__dict__['execute']
+hack这个方法可以，然后看了一看mysqldb的，居然不存在这个办法。然后问了作者他说不支持这样inject behavior，可以尝试使用sqlalchemy的hook，我才想起对于这么大的开源代码
+应该是有hook的才对，但是一开始就一直想着怎么找到他最底层的execute方法，就忽略了这点。不过他的hook也是不支持读取到数据库初始化时候所执行的操作的，不过可以勉强接受。
+不过这样可以支持所有数据库驱动。
+  初略看了一下vc的代码，有在endpoint操作数据库的，然后model层好像和数据库没什么关系，导致可能写代码的时候有点偏差。
+  还有关于那个生成4位随机数的，用了window.crypto.getrandomvalues，因为网上看到这个符合密码学随机，而且刚看了cf一篇hack cpp的rand的blog
+  https://codeforces.com/blog/entry/61587
+  
+  关于js的proto，不了解为什么vc上面前端部分的proto需要手动生成，后端的不是写好proto文件，不需要手动解析出pb文件出来的吗，前端的js要，然后没找到工具生成。
+自动弄的时候又发现自己的protoc版本是2.6，把vc的protoc复制过去自己本地的后p8都用不了了，搞了挺久的。希望有一个脚本可以自动生成一下。
+  还有有一个pr忘记看chrome的console，导致有一些syntax的warning没有fix就merge了，以后需要多加留意。
+  
+

@@ -1,0 +1,25 @@
+  首先谢谢公司让我提前返回实习的机会。
+  毕业设计也是用公司web开发的技术栈做的，遇到了一点bug所以也需要提前回来看看代码。
+  第一个就是sqlalchemy库的，会自动开启新事务，也没有commit或者rollback，所以导致
+后台的逻辑会有bug。当时就只记得vc-server上瑞阳说不应该在endpoint里操作数据库，如果按照vc-server在endpoint里commit就没有这样的bug了。回到来的第一天就看了
+公司的代码，测试发现会自动rollback。然后找到是create_flask_app里面写的after_request逻辑。
+  第二个就是不会使用material-ui里面css的hover函数，网上资料也好少，毕业设计只能用document.getElementById这样模拟。也就是里面下面这种样式，当时不太会也不记得代码实现。
+  tripRow: {
+    '& $moreButton': {
+      visibility: 'hidden',
+    },
+    '&:hover $moreButton': {
+      visibility: 'visible',
+    },
+  },
+  第三个是docker的.dockerignore文件，由于家里的电脑内存小当时没写这个，把所有上下文都发去docker-daemon去了导致跑不了。也就是我把mysql-data和redis-data也发过去了。
+由于现在公司的项目都是用webapp-cli构建的，不知道会不会存在这个问题。而且这周我也没时间去测试。
+  还有一个想问的就是怎么保存用户的账号密码，目前不需要考虑打通什么服务，只考虑怎样安全点而已。公司都是用OAUTH或者firebase，我的毕业设计就加密了一下而且可以解密。
+感觉不太好。
+
+  这周做的东西，学了挺久的。重新构建一个项目我本来是想和vc尽量相同，因为我觉得这样以后的人员开发起来不会是两套代码。而且我写出来的水平感觉不太好。比如
+很多按钮或者页面需要登录后才能操作的，如果我写就会在点击前面加上一个判断。这周看了vc-web里面的基本代码，用的是React.createContext()这样的上下文管理(在AuthContext.js)，
+感觉很好就复用了，一开始是照搬但是莫名有bug，版本不同啊之类的。最后自己学习了一下自己写了。还有很多基础组件也类似，看了vc-web后面复用了。有带着一点点批判眼光但是
+最后确实感觉这样写比较好，自己想不出更好的方法。pr其实提了但是没给review，全部都是基础配置还没有什么页面，后台刚刚写好BUILD可以打通。
+  这个任务需要认真做好，稳定以及方便维护。会努力的。
+

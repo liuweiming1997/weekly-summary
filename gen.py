@@ -31,6 +31,8 @@ def gen() -> 'void':
         with open(file_name, "w") as fp:
             pass
         timestamp = timestamp + DAY
+    with open("total", "w") as fp:
+        pass
 
 if __name__ == '__main__':
     gen()
